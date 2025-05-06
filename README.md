@@ -40,10 +40,18 @@ class Program
 
     // Función para validar paréntesis
     static bool EstaBalanceado(string s)
-    {
+
+    {   //Pila para definir valores que abren los parentesis.
         var stack = new Stack<char>();
+
+        //Dictionary que unes los valores de cierre con los que abren
         var pares = new Dictionary<char, char> { { ')', '(' }, { ']', '[' }, { '}', '{' } };
 
+        /*Busqueda de valores c. Si encuentra valor que abre, se agrega a la pila para poder verificar si se cierra despues.
+         * El else If se ejecuta cuando el valor ingresado por el usuario pertenece a un valor de cierre.
+         * Si tiene valor de cierre, verifica la pila, si la pila es 0 significa por logica que no se ha tenido un valor que abre el parantesis, por lo que sera False.
+         * Stack.pop ayuda a verificar que correspondan los valores de cierre a los que se abrieron.
+        */
         foreach (var c in s)
         {
             if (pares.ContainsValue(c))
