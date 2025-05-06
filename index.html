@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultados del Validador de Paréntesis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      margin-top: 1rem;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #eaeaea;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resultados del Validador de Paréntesis</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Entrada</th>
+        <th>Resultado</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-resultados">
+    </tbody>
+  </table>
+
+  <script>
+    const url = "https://ejercicioethian-default-rtdb.firebaseio.com/validaciones.json";
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        const tabla = document.getElementById("tabla-resultados");
+        for (let key in data) {
+          const fila = document.createElement("tr");
+          fila.innerHTML = `
+            <td>${data[key].Entrada}</td>
+            <td>${data[key].Resultado}</td>
+            <td>${data[key].Fecha}</td>
+          `;
+          tabla.appendChild(fila);
+        }
+      })
+      .catch(error => {
+        console.error("Error al cargar datos:", error);
+      });
+  </script>
+</body>
+</html>
